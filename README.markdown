@@ -1,4 +1,4 @@
-## Yii extension Social plugins that allows to add tweet, twitter connect,facebook buttons to your site
+## Yii extension Social plugins that allows to add tweet, twitter connect, facebook buttons to your site
 Yii ext Social plugins that allows to add tweet, twitter connect, facebook, googleplus buttons to your site  
 
 ### Installation ###
@@ -37,6 +37,7 @@ and you can add it in view section:
             )
     );
 ```
+you can sort these buttons by id
 if you using twitter connect you need to add callback url: http://YOUR_SITE/twconnect
 now avalible template for twitterconnect:
 
