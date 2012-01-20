@@ -2,7 +2,7 @@
 /**
  * FacebookLikeButton class file.
  *
- * @author Sergey Malyshev <malyshev.php@gmail.com>
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  */
 
 /**
