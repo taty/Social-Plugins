@@ -1,175 +1,67 @@
 <?php
-
 /**
- * SocialPlugin class.
+ * SocialPlugins class file.
  *
- * @author Vakulenko Tatiana <tvakulenko@gmail.com>
- * @package packageName
- * @since 1.0
- *
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  */
-
+Yii::import('zii.widgets.CListView');
 /**
- * SocialPlugin class.
+ * SocialPlugins represents an ....
  *
  * SocialPlugin allows you to add social icons to your site
- */
-class SocialPlugins extends CWidget
-{
+ *
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
+ * @version $Id$
+ * @package SocialPlugins
+ * @since 1.0
+*/
+class SocialPlugins extends CListView
+{  
+        
+    private $_buttons = array(
+        'FacebookLikeButton',
+        'TweetButton',
+        'GooglePlusoneButton',
+        'TwitterConnectButton'
+    );   
+    /**
+     * This is a list of paths to extra buttons.
+     * Example:
+     * 'additionalButtons' => array(
+     *    'application.extensions.social-widgets.newButtonWidget', // added button as last
+     * )
+     * @var array
+     */
+    //private $_extra = array();
 
-    /**
-     * Description of visible variable.
-     *
-     * @var string Visible.
-     */
-    public $visible = '1';
-    
-    /**
-     * Description of options variable.
-     *
-     * @var array Options.
-     */
-    private $_options = array(
-        'facebooklike' => array(),
-        'tweet' => array(),
-        'googleplus' => array(),
-        'twitterconnect' => array(),
-    );
-    /**
-     * Description of config variable.
-     *
-     * @var array Config.
-     */
-    private $_config = array(
-        'facebooklike' => array('class' => 'FacebookLikeButton'),
-        'tweet' => array('class' => 'TweetButton'),
-        'googleplus' => array('class' => 'GooglePlusoneButton'),
-        'twitterconnect' => array('class' => 'TwitterConnectButton'),
-    );
-
-    /**
-     * Function Constructor.
-     *
-     * This method set the сonstructor.
-     *
-     * @param string $owner The default owner variable.
-     *
-     * @return
-     */
-    public function __construct($owner = null) {
-        parent::__construct($owner);
-    }
-
-    /**
-     * Function run.
-     *
-     * This method run the controller.
-     *
-     * @return
-     */
-    public function run() {
-        $this->renderWidget();
-    }
-
-    /**
-     * Function getOptions.
-     *
-     * This method get the options.
-     *
-     * @return
-     */
-    public function getOptions() {
-        if (is_null($this->_options) !== true) {
-            $this->_options = new CMap($this->_options, false);
-        }
-        return $this->_options;
-    }
-
-    /**
-     * Function getTagOptions.
-     *
-     * This method get tag options.
-     *
-     * @return
-     */
-    private function getTagOptions() {
-        return $this->getOptions()->toArray();
-    }
-
-    /**
-     * Function renderWidget.
-     *
-     * This method render the widget.
-     *
-     * @return
-     */
-    protected function renderWidget() {
-        $options = array_merge_recursive($this->getTagOptions(), $this->_config);
-
+    public function init()
+    {
         $sort = new CSort;
         $sort->defaultOrder = 'id ASC';
         $sort->attributes = array('id');
-        $dataProvider = new CArrayDataProvider($options,
-                        array('sort' => $sort)
-        );
-        $this->widget('zii.widgets.CListView', array(
-            'dataProvider' => $dataProvider,
-            'itemView' => '_view',
-            'summaryText' => ''
-        ));
+        $dataProvider = new CArrayDataProvider($this->getButtons(), array('sort' => $sort));
+        $this->dataProvider = $dataProvider;
+        $this->summaryText = '';
+        $this->itemView = '_view';        
+        parent::init();
     }
 
-    /**
-     * Function setFacebooklike.
-     *
-     * This method set the facebooklike.
-     *
-     * @param integer $value The Facebooklike button.
-     *
-     * @return
-     */
-    public function setFacebooklike($value) {
-        $this->getOptions()->add('facebooklike', $value);
+    public function setButtons(array $buttons)
+    {
+        $this->_buttons = $buttons;
     }
 
-    /**
-     * Function setTweet.
-     *
-     * This method set the tweet.
-     *
-     * @param integer $value The tweet button.
-     *
-     * @return
-     */
-    public function setTweet($value) {
-        $this->getOptions()->add('tweet', $value);
+    public function getButtons()
+    {
+        return $this->_buttons;
+    }
+    
+    public function getOwner()
+    {
+        return $this;
     }
 
-    /**
-     * Function setGoogleplus.
-     *
-     * This method set the googleplus.
-     *
-     * @param integer $value The googleplus button.
-     *
-     * @return
-     */
-    public function setGoogleplus($value) {
-        $this->getOptions()->add('googleplus', $value);
-    }
-
-    /**
-     * Function setTwitterconnect.
-     *
-     * This method set the twitterconnect.
-     *
-     * @param integer $value The twitterconnect button.
-     *
-     * @return
-     */
-    public function setTwitterconnect($value) {
-        $this->getOptions()->add('twitterconnect', $value);
-    }
-
+    
+    
 }
 
