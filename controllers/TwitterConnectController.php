@@ -1,31 +1,25 @@
 <?php
 /**
- * TwitterConnectController class.
+ * TwitterConnectController class file.
  *
- * @author Vakulenko Tatiana <tvakulenko@gmail.com>
- * @package packageName
- * @since 1.0
- * 
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  */
 
 /**
- * TwitterConnectController class.
- * 
+ * TwitterConnectController represents an ...
+ *
  * TwitterConnectController allows you to authorizate with twitter
+ *
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
+ * @version $Id$
+ * @package
+ * @since 1.0
  */
-
 class TwitterConnectController extends Controller
 {
-  
-    /**
-    * Function actionIndex.
-    * 
-    * This method is Index.
-    * 
-    * @return 
-    */
-    public function actionIndex() {
 
+    public function actionIndex()
+    {
         if (true === is_null(Yii::app()->session->get('twitter')))
         {
             Yii::app()->socialplugins->userOAuth();
@@ -35,15 +29,7 @@ class TwitterConnectController extends Controller
             );
         }
     }
-  
-    
-    /**
-    * Function actionLogout.
-    *
-    * Function logout.
-    *
-    * @return
-    */
+          
     public function actionLogout()
     {
         Yii::app()->session->destroy();
