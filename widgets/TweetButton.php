@@ -2,7 +2,7 @@
 /**
  * TweetButton class file.
  *
- * @author Sergey Malyshev <malyshev.php@gmail.com>
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  */
 
 /**
@@ -10,10 +10,10 @@
  *
  * Description of TweetButton
  *
- * @author Sergey Malyshev <malyshev.php@gmail.com>
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  * @version $Id$
  * @package
- * @since 1.1.7
+ * @since 1.0
  */
 class TweetButton extends CWidget
 {
