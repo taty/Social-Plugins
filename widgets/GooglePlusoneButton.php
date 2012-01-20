@@ -2,7 +2,7 @@
 /**
  * GooglePlusoneButton class file.
  *
- * @author Sergey Malyshev <malyshev.php@gmail.com>
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  */
 
 /**
@@ -10,10 +10,10 @@
  *
  * Description of GooglePlusoneButton
  *
- * @author Sergey Malyshev <malyshev.php@gmail.com>
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
  * @version $Id$
  * @package
- * @since 1.1.7
+ * @since 1.0
  */
 class GooglePlusoneButton extends CWidget
 {
