@@ -1,61 +1,50 @@
 <?php
+/**
+ * TwitterConnect class file.
+ *
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
+ */
 
 /**
- * TwitterConnect class.
+ * TwitterConnect represents an ....
  *
- * @author Vakulenko Tatiana <tvakulenko@gmail.com>
- * @package packageName
+ * Description of TwitterConnect 
+ *
+ * @author Tatiana Vakulenko <tvakulenko@gmail.com>
+ * @version $Id$
+ * @package SocialPlugins
  * @since 1.0
- *
- */
-
-/**
- * TwitterConnect class.
- *
- * TwitterConnect allows you to authorizate with twitter
- */
+*/
 
 class TwitterConnect extends CApplicationComponent
 {
 
     /**
-     * Description of consumerKey variable.
-     *
      * @var string consumerKey.
      */
     public $consumerKey;
     /**
-     * Description of consumerSecret variable.
-     *
      * @var string consumerSecret.
      */
     public $consumerSecret;
     /**
-     * Description of twitterRequestUrl variable.
-     *
      * @var string twitterRequestUrl.
      */
     public $twitterRequestUrl;
     /**
-     * Description of twitterAccessUrl variable.
-     *
      * @var string twitterAccessUrl.
      */
     public $twitterAccessUrl;
     /**
-     * Description of twitterAutorizeUrl variable.
-     *
      * @var string twitterAutorizeUrl.
      */
     public $twitterAutorizeUrl;
 
     /**
-     * Initializes the controller.
-     *
      * This method is called by the application before the controller starts to execute.
-     * @return
      */
-    public function init() {
+    public function init()
+    {
         parent::init();
 
         Yii::setPathOfAlias('socialplugins', dirname(__FILE__));
@@ -72,32 +61,28 @@ class TwitterConnect extends CApplicationComponent
     }
 
     /**
-     * Function getOAuthConnection.
-     *
+     * Setting OAuth Connection.
      * This method set oauth connection.
-     *
-     * @param string $method The method.
-     * @param string $type   The type.
-     *
-     * @return
+     * @param string $method this optional parameter defines which signature method to use.
+     * @param string $type this optional parameter defines how to pass the OAuth parameters to a consumer.
+     * @return OAuth the oauth object.
      */
-    public function getOAuthConnection($method, $type) {
+    public function getOAuthConnection($method, $type)
+    {
         $oauth = new OAuth($this->consumerKey, $this->consumerSecret, $method, $type);
         $oauth->enableDebug();
         return $oauth;
     }
 
     /**
-     * Function userOAuth.
-     *
-     * This method do oauth connection.
-     *
-     * @return
+     * Working with oauth tokens and recieve user data.
      */
-    public function userOAuth() {
+    public function userOAuth()
+    {
         $oauth = $this->getOAuthConnection(OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_FORM);
 
-        try {
+        try
+        {
             if (Yii::app()->request->getParam('oauth_token') !== ''
                     && false === is_null(Yii::app()->session->get('oauth_token_secret')))
             {
@@ -135,16 +120,13 @@ class TwitterConnect extends CApplicationComponent
     }
 
     /**
-     * Function getUserInfo.
-     *
-     * Function return user information.
-     *
-     * @param string $token  Token.
-     * @param string $secret Token secret.
-     *
-     * @return
+     * Get user information.
+     * @param string $token token.
+     * @param string $secret token secret.
+     * @return CJSON object.
      */
-    public function getUserInfo($token, $secret) {
+    public function getUserInfo($token, $secret)
+    {
 
         $oauth = $this->getOAuthConnection(OAUTH_SIG_METHOD_HMACSHA1, OAUTH_AUTH_TYPE_URI);
         $oauth->setToken($token, $secret);
