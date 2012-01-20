@@ -28,14 +28,15 @@ and you can add it in view section:
 
 ``` php
 <?php 
-//...   
+//... 
     $this->widget('ext.socialplugins.SocialPlugins', array(
-                 'twitterconnect' => array('id' => '1','visible'=>'1', 'options'=>array('template'=>'standart') ),
-                 'tweet' => array('id' => '2','visible'=>'1', 'options'=>array()),
-                 'googleplus' => array('id' => '4', 'visible'=>'1', 'options'=>array('size'=>'small')),
-                 'facebooklike' => array('id' => '3', 'visible'=>'1',  'options'=>array()),
-            )
-    );
+		'buttons'=>array(
+                    "TwitterConnectButton"=>array('id' => '1', 'template'=>'box'),
+                    "GooglePlusoneButton"=>array('id' => '2'),
+                    "FacebookLikeButton"=>array('id' => '4')
+                ),                
+       	)
+    );      
 ```
 you can sort these buttons by id
 if you using twitter connect you need to add callback url: http://YOUR_SITE/twconnect
