@@ -29,17 +29,32 @@ and you can add it in view section:
 ``` php
 <?php 
 //... 
-    $this->widget('ext.socialplugins.SocialPlugins', array(
+	$this->widget('ext.socialplugins.SocialPlugins', array(
 		'buttons'=>array(
-                    "TwitterConnectButton"=>array('id' => '1', 'template'=>'box'),
-                    "GooglePlusoneButton"=>array('id' => '2'),
-                    "FacebookLikeButton"=>array('id' => '4')
-                ),                
+                    "GooglePlusoneButton"=>array('id' => '1'),
+                    "FacebookLikeButton"=>array('id' => '2'),
+                    "TwitterConnectButton"=>array('id' => '3', 'template'=>'standart'),
+                    "TweetButton"=>array(
+                        'id' => '4','counturl'=>'http://YOUR_URL/',
+                        'url' => 'http://YOUR_URL/',
+                        'text' => 'My Share Information',
+                        'username' => 'YOUR_USERNAME',
+                        'count' => 'vertical',
+                        'language' => 'en'
+                    )
+                ),
+                'additionalButtons' => array(
+                    'application.extensions.social-widgets.SampleButton'=>array('id'=>'5'),
+                    'application.extensions.social-widgets.DiffButton'=>array('id'=>'6'),
+                )
+               
        	)
-    );      
+    );          
 ```
-you can sort these buttons by id
-if you using twitter connect you need to add callback url: http://YOUR_SITE/twconnect
+- you can sort these buttons by id
+- you can add additional buttons if you need
+- you can setting parametrs to each button
+- if you using twitter connect you need to add callback url: http://YOUR_SITE/twconnect
 now avalible template for twitterconnect:
 
 - box
