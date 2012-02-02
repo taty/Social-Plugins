@@ -23,17 +23,17 @@ class SocialPlugins extends CListView
         'TweetButton',
         'GooglePlusoneButton',
         'TwitterConnectButton'
-    );   
+    );
+    private $_additionalButtons = array();
     /**
      * This is a list of paths to extra buttons.
      * Example:
      * 'additionalButtons' => array(
-     *    'application.extensions.social-widgets.newButtonWidget', // added button as last
+     *    'application.extensions.social-widgets.newButtonWidget'=>array(), // added button as last
      * )
      * @var array
      */
-    //private $_extra = array();
-
+   
     public function init()
     {
         $sort = new CSort;
@@ -44,6 +44,7 @@ class SocialPlugins extends CListView
         $this->summaryText = '';
         $this->itemView = '_view';        
         parent::init();
+        
     }
 
     public function setButtons(array $buttons)
@@ -53,15 +54,30 @@ class SocialPlugins extends CListView
 
     public function getButtons()
     {
-        return $this->_buttons;
+       $arr = array();
+       foreach($this->_buttons as $key=>$button)
+       {
+            $arr['ext.socialplugins.widgets.'.$key] = $button;
+       }        
+       return CMap::mergeArray($arr, $this->_additionalButtons);
+    }
+
+    public function setAdditionalButtons(array $additionalButtons)
+    {
+        $func = function($value) {
+             Yii::import($value);
+        };
+        foreach($additionalButtons as $value)
+        {
+            array_map($func, $value);
+        }
+        $this->_additionalButtons = $additionalButtons;
     }
     
     public function getOwner()
     {
         return $this;
     }
-
-    
-    
+        
 }
 
