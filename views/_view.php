@@ -1,4 +1,4 @@
 <div class="social">
-    <?php $this->widget('ext.socialplugins.widgets.'.$index, $data); ?>
+    <?php $this->widget($index, $data); ?>
 </div>
 
